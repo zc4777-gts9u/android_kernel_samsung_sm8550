@@ -2116,8 +2116,14 @@ irqreturn_t stm_ts_irq_thread(int irq, void *ptr)
 				event_buff[12], event_buff[13], event_buff[14], event_buff[15]);
 
 			if (event_buff[2] == STM_TS_CMD_SET_GET_OPMODE && event_buff[3] == STM_TS_OPMODE_NORMAL) {
+				/* Don't report SPONGE_EVENT_TYPE_TSP_SCAN_UNBLOCK when disabling touchscreen. */
+				//sec_input_gesture_report(&ts->client->dev,
+				//		SPONGE_EVENT_TYPE_TSP_SCAN_UNBLOCK, 0, 0);
 				input_info(true, &ts->client->dev, "%s: Normal changed\n", __func__);
-			} else if (event_buff[2] == STM_TS_CMD_SET_GET_OPMODE && event_buff[3] == STM_TS_OPMODE_LOWPOWER) {
+			} else if (event_buff[2] == STM_TS_CMD_SET_GET_OPMODE &&
+				   event_buff[3] == STM_TS_OPMODE_LOWPOWER) {
+				//sec_input_gesture_report(&ts->client->dev,
+				//		SPONGE_EVENT_TYPE_TSP_SCAN_UNBLOCK, 0, 0);
 				input_info(true, &ts->client->dev, "%s: lp changed\n", __func__);
 			}
 

@@ -361,4 +361,26 @@ source "drivers/input/sec_input/stm_spi/Kconfig"
 
 source "drivers/mfd/slsi/s2mpb02/Kconfig"
 
+source "drivers/battery/charger/sm5440_charger/Kconfig"
+
+source "drivers/battery/charger/sm5714_charger/Kconfig"
+
+source "drivers/battery/fuelgauge/sm5714_fuelgauge/Kconfig"
+
+source "drivers/mfd/sm/sm5714/Kconfig"
+
+source "drivers/input/touchscreen/stm/fts1ba90a/Kconfig"
+
+source "drivers/muic/sm/sm5714/Kconfig"
+
+source "drivers/usb/typec/sm/sm5714/Kconfig"
+
+source "drivers/input/sec_input/stm32/Kconfig"
+
+source "drivers/input/touchscreen/goodix/berlin/Kconfig"
+
+source "drivers/input/wacom_tablet/Kconfig"
+
+source "drivers/vibrator/dc/Kconfig"
+
 endmenu

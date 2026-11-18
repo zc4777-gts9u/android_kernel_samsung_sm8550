@@ -267,3 +267,18 @@ obj-y				+= sensors/vl53l8/
 endif
 obj-y				+= input/sec_input/stm_spi/
 obj-y				+= mfd/slsi/s2mpb02/
+
+ifneq ($(filter y,$(CONFIG_SEC_PLATFORM_GTS9WIFI) $(CONFIG_SEC_PLATFORM_GTS9UWIFI)),)
+obj-y += battery/charger/sm5440_charger/
+obj-y += battery/charger/sm5714_charger/
+obj-y += battery/fuelgauge/sm5714_fuelgauge/
+obj-y += sec_panel_notifier_v2/
+obj-y += mfd/sm/sm5714/
+obj-y += input/touchscreen/stm/fts1ba90a/
+obj-y += muic/sm/sm5714/
+obj-y += usb/typec/sm/sm5714/
+obj-y += input/sec_input/stm32/
+obj-y += input/touchscreen/goodix/berlin/
+obj-y += input/wacom_tablet/
+obj-y += vibrator/dc/
+endif

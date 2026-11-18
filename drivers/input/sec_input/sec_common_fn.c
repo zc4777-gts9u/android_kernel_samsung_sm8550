@@ -668,7 +668,10 @@ static void sec_input_coord_report(struct device *dev, u8 t_id)
 		}
 
 		input_mt_slot(pdata->input_dev, t_id);
-		input_mt_report_slot_state(pdata->input_dev, MT_TOOL_FINGER, 1);
+		/* Keep a classified palm rejected until this contact is released. */
+		input_mt_report_slot_state(pdata->input_dev,
+				(pdata->coord[t_id].palm || pdata->coord[t_id].palm_count) ?
+				MT_TOOL_PALM : MT_TOOL_FINGER, 1);
 		input_report_key(pdata->input_dev, BTN_TOUCH, 1);
 		input_report_key(pdata->input_dev, BTN_TOOL_FINGER, 1);
 		input_report_key(pdata->input_dev, BTN_PALM, pdata->palm_flag);
@@ -921,6 +924,7 @@ static void sec_input_set_prop(struct device *dev, struct input_dev *input_dev, 
 	input_set_abs_params(input_dev, ABS_MT_POSITION_Y, 0, pdata->max_y, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR, 0, 255, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MINOR, 0, 255, 0, 0);
+	input_set_abs_params(input_dev, ABS_MT_TOOL_TYPE, MT_TOOL_FINGER, MT_TOOL_PALM, 0, 0);
 	if (pdata->support_mt_pressure)
 		input_set_abs_params(input_dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
 
@@ -962,6 +966,7 @@ static void sec_input_set_prop2(struct device *dev, struct input_dev *input_dev,
 	input_set_abs_params(input_dev, ABS_MT_POSITION_Y, 0, pdata->max_y, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR, 0, 255, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MINOR, 0, 255, 0, 0);
+	input_set_abs_params(input_dev, ABS_MT_TOOL_TYPE, MT_TOOL_FINGER, MT_TOOL_PALM, 0, 0);
 	if (pdata->support_mt_pressure)
 		input_set_abs_params(input_dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
 
@@ -1003,6 +1008,7 @@ static void sec_input_set_prop_pad(struct device *dev, struct input_dev *input_d
 	input_set_abs_params(input_dev, ABS_MT_POSITION_Y, 0, pdata->max_y, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR, 0, 255, 0, 0);
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MINOR, 0, 255, 0, 0);
+	input_set_abs_params(input_dev, ABS_MT_TOOL_TYPE, MT_TOOL_FINGER, MT_TOOL_PALM, 0, 0);
 	if (pdata->support_mt_pressure)
 		input_set_abs_params(input_dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
 
